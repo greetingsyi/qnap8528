@@ -1,4 +1,32 @@
-
+源仓库的脚本不支持TS-464C2,按照源作者的说明给脚本添加了`skip_hw_check=true`选项，现在可以正常编译了。
+```
+镜像构建成功
+启动 Docker 容器...
+07b205615dc2bfa87720660e7446d59a692d6ee8708d544a80f2a46843b2ef67
+开始编译内核模块...
+make: Entering directory '/usr/src/linux-headers'
+warning: the compiler differs from the one used to build the kernel
+  The kernel was built by: gcc (Debian 12.2.0-14) 12.2.0
+  You are using:           gcc (Debian 12.2.0-14+deb12u1) 12.2.0
+make: Leaving directory '/usr/src/linux-headers'
+编译成功
+安装驱动到系统...
+驱动 qnap8528 已加载
+已配置开机自动加载
+清理临时容器...
+检测传感器数据...
+qnap8528 传感器信息：
+qnap8528-isa-0000
+Adapter: ISA adapter
+fan1:         892 RPM
+temp1:        +45.0°C
+temp6:        +39.0°C
+temp11:        +2.0°C
+temp12:        +2.0°C
+root@TS-464C2:/opt/qnap8528# lsmod|grep qnap
+qnap8528               61440  0
+```
+---
 # QNAP8528 内核模块（容器化编译版）  
 
 本项目基于 [0xGiddi/qnap8528](https://github.com/0xgiddi/qnap8528) 二次开发，针对 NAS 系统普遍缺乏编译环境、追求系统纯净的用户，新增 **Docker 容器化编译方案**。通过映射 NAS 内核资源到容器，实现无侵入式驱动编译与安装，兼容原厂及第三方固件（如飞牛 OS）。  
